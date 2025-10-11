@@ -1,0 +1,14 @@
+extends Area2D
+
+var targetDirection
+@export var projectileSpeed := 50
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var mousePosition = get_global_mouse_position()
+	targetDirection = global_position.direction_to(mousePosition)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	global_position += targetDirection * projectileSpeed * delta
