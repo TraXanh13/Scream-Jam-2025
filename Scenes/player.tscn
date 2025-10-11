@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://du6f14v6vu5g6"]
+
+[ext_resource type="Texture2D" uid="uid://j3xre6q4swdr" path="res://Sprites/colored-transparent.png" id="1_v0iea"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(12, 14)
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v0iea")
+region_enabled = true
+region_rect = Rect2(427, 1, 12, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cvnsp")
