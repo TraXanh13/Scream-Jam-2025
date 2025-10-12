@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://blpqs8d104ean"]
+[gd_scene load_steps=3 format=3 uid="uid://blpqs8d104ean"]
 
+[ext_resource type="Script" uid="uid://m6odufr3fppk" path="res://Scripts/level.gd" id="1_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://du6f14v6vu5g6" path="res://Scenes/player.tscn" id="1_tumq0"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_k5f4k")
+maxEnemies = 10
 
 [node name="Player" parent="." instance=ExtResource("1_tumq0")]
 position = Vector2(113, 56)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy Spawn Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Enemy Spawn Timer" to="." method="_on_enemy_spawn_timer_timeout"]
