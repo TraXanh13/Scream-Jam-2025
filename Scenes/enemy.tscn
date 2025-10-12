@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbxeabvvo07ij"]
+
+[ext_resource type="Script" uid="uid://m7wg8jnmwrdi" path="res://Scripts/enemy.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://j3xre6q4swdr" path="res://Sprites/colored-transparent.png" id="1_hghv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hghv2"]
+size = Vector2(12, 14)
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_1f0kj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hghv2")
+region_enabled = true
+region_rect = Rect2(444, 103, 12, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hghv2")
