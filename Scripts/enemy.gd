@@ -1,21 +1,20 @@
-extends CharacterBody2D
+extends Area2D
 
 @export var moveSpeed := 20
-var target
+var target : CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var rng = RandomNumberGenerator.new()
-	var gameWindowWidth = get_viewport().get_visible_rect().size[0]
-	var gameWindowHeight = get_viewport().get_visible_rect().size[1]
-	var posX = rng.randf_range(0, gameWindowWidth)
-	var posY = rng.randf_range(0, gameWindowHeight)
-	position = Vector2(posX, posY)
-	target = Vector2(rng.randf_range(0, gameWindowWidth), rng.randf_range(0, gameWindowHeight))
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var targetDirection = (target - global_position).normalized()
-	velocity = targetDirection * moveSpeed
-	move_and_slide()
+	if target != null:
+		var targetDirection = (target.global_position - global_position).normalized()
+		var velocity = targetDirection * moveSpeed
+		global_position += velocity * delta
+	
+func set_target(targetToChase: CharacterBody2D):
+	if targetToChase != null:
+		target = targetToChase
