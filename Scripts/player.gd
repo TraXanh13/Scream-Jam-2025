@@ -42,3 +42,8 @@ func _take_damage(damage: int):
 	else:
 		health -= damage
 		
+func _add_exp(value: int):
+	experience += value
+	if (experience >= expToNextLevel):
+		experience = 0
+		print("Level up!!")

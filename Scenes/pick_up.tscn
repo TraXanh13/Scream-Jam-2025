@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpjt3grn5wgnk"]
+
+[ext_resource type="Texture2D" uid="uid://j3xre6q4swdr" path="res://Sprites/colored-transparent.png" id="1_kcluc"]
+[ext_resource type="Script" uid="uid://dpncopd6j7ec3" path="res://Scripts/pick_up.gd" id="1_vjksl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcluc"]
+
+[node name="PickUp" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_vjksl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kcluc")
+region_enabled = true
+region_rect = Rect2(563, 172, 12, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kcluc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
