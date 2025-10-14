@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var health := 2
 @export var moveSpeed := 20
 var target : CharacterBody2D
 
@@ -10,6 +11,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if health <= 0:
+		print("Enemy defeated")
+		queue_free()
+	
 	if target != null:
 		var targetDirection = (target.global_position - global_position).normalized()
 		var velocity = targetDirection * moveSpeed
