@@ -1,6 +1,7 @@
 extends Area2D
 
 var targetDirection
+@export var damage : int = 1
 @export var projectileSpeed := 50
 @export var duration := 5.0
 
@@ -19,11 +20,11 @@ func _process(delta: float) -> void:
 # Called when colliding with another Area2D
 # Using this for collisions with enemies
 func _on_area_entered(area: Area2D) -> void:
-	print("projectile hit!")
+	#print("projectile hit!")
 	
 	# Check if other Area2D is not null and if it has health
-	if (area != null and area.health != null):
-		area.health -= 1
+	if (area != null):
+		area._take_damage(damage)
 	
 	# Delete the projectile
 	queue_free()

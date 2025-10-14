@@ -6,6 +6,9 @@ extends CharacterBody2D
 var projectile_scene: PackedScene = load("res://Scenes/projectile.tscn")
 @export var canAttack := true
 
+var experience : int = 0
+var expToNextLevel : int = 3
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# set player start position to center of the game window
@@ -18,9 +21,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if health <= 0:
 		print("You died...")
-	playerMovement()
+	player_movement()
 
-func playerMovement() -> void:
+func player_movement() -> void:
 	var inputDirection = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = inputDirection * movementSpeed
 	move_and_slide()
@@ -30,3 +33,12 @@ func _on_attack_timer_timeout() -> void:
 		var projectile = projectile_scene.instantiate()
 		projectile.position = global_position
 		$"../..".add_child(projectile)
+
+func _take_damage(damage: int):
+	if (health <= 0):
+		pass
+	elif (health < damage):
+		health = 0
+	else:
+		health -= damage
+		
