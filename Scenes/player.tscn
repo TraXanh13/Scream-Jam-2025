@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://du6f14v6vu5g6"]
+[gd_scene load_steps=4 format=3 uid="uid://du6f14v6vu5g6"]
 
-[ext_resource type="Script" uid="uid://cgmajx21mi3g" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://dlexwva4e6t2f" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://j3xre6q4swdr" path="res://Sprites/colored-transparent.png" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://dl8a28fng4qgp" path="res://Scripts/player_attack.gd" id="3_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(12, 14)
@@ -18,11 +17,8 @@ region_rect = Rect2(427, 1, 12, 14)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cvnsp")
 
-[node name="PlayerAttack" type="Node2D" parent="."]
-script = ExtResource("3_6t5aa")
-
-[node name="AttackTimer" type="Timer" parent="PlayerAttack"]
+[node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
-[connection signal="timeout" from="PlayerAttack/AttackTimer" to="PlayerAttack" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
