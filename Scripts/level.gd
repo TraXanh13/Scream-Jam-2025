@@ -5,7 +5,10 @@ var pickupScene : PackedScene = load("res://Scenes/pick_up.tscn")
 
 @export var maxEnemies := 5
 var numEnemies := 0
+var numEnemiesKilled := 0
 
+var waveNumber : int = 1
+signal start_next_wave(waveNum: int)
 
 
 func _on_enemy_spawn_timer_timeout() -> void:
@@ -25,6 +28,21 @@ func _on_enemy_spawn_timer_timeout() -> void:
 
 func _on_enemy_enemy_death(pos: Vector2) -> void:
 	#print("enemy defeated")
+	
+	# Spawn exp pickup at defeated enemy location and add to level under PickUps
 	var pickup = pickupScene.instantiate()
 	pickup.global_position = pos
 	$PickUps.add_child(pickup)
+	
+	# Increment number of enemies defeated
+	# Start next wave if numEnemiesKilled == maxEnemies
+	numEnemiesKilled += 1
+	if (numEnemiesKilled >= maxEnemies):
+		waveNumber += 1
+		start_next_wave.emit(waveNumber)
+
+
+func _on_start_next_wave(waveNum: int) -> void:
+	print("Next wave starting...")
+	numEnemies = 0
+	numEnemiesKilled = 0
