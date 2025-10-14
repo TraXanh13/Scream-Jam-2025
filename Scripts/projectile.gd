@@ -16,11 +16,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global_position += targetDirection * projectileSpeed * delta
 
-
+# Called when colliding with another Area2D
+# Using this for collisions with enemies
 func _on_area_entered(area: Area2D) -> void:
 	print("projectile hit!")
+	
+	# Check if other Area2D is not null and if it has health
 	if (area != null and area.health != null):
 		area.health -= 1
+	
+	# Delete the projectile
 	queue_free()
 
 
