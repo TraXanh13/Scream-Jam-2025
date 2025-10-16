@@ -22,4 +22,8 @@ shape = SubResource("RectangleShape2D_cvnsp")
 wait_time = 2.0
 autostart = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
