@@ -10,6 +10,8 @@ var projectile_scene: PackedScene = load("res://Scenes/projectile.tscn")
 var experience : int = 0
 @export var expToNextLevel : int = 3
 
+@onready var projectile_audio = $AudioStreamPlayer2D
+
 signal health_updated(health : int)
 signal exp_updated(exp: int)
 signal player_level_up
@@ -40,6 +42,7 @@ func _on_attack_timer_timeout() -> void:
 		var projectile = projectile_scene.instantiate()
 		projectile.position = global_position
 		$"../..".add_child(projectile)
+		projectile_audio.play()
 
 func _take_damage(damage: int):
 	if (health <= 0):

@@ -3,7 +3,9 @@ extends Area2D
 @export var health := 2
 @export var moveSpeed := 20
 @export var attackDamage : int = 1
+const SFX_enemy_death = preload("res://Sounds/enemy_death_normal.ogg")
 var target : CharacterBody2D
+
 
 signal enemyDeath(pos: Vector2)
 
@@ -14,8 +16,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	if health <= 0:
 		#print("Enemy defeated")
+		#play_one_instance_sound(SFX_enemy_death, global_position)
 		enemyDeath.emit(global_position)
 		queue_free()
 	
