@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
-@export var movementSpeed := 30
-var health : int
-@export var maxHealth : int = 5
+@export var movementSpeed := 150
+var health: int
+@export var maxHealth: int = 5
 
 var projectile_scene: PackedScene = load("res://Scenes/projectile.tscn")
 @export var canAttack := true
 
-var experience : int = 0
-@export var expToNextLevel : int = 3
+var experience: int = 0
+@export var expToNextLevel: int = 3
 
-signal health_updated(health : int)
+signal health_updated(health: int)
 signal exp_updated(exp: int)
 signal player_level_up
 
@@ -19,7 +19,7 @@ func _ready() -> void:
 	# set player start position to center of the game window
 	var width = get_viewport().get_visible_rect().size[0]
 	var height = get_viewport().get_visible_rect().size[1]
-	position = Vector2(width/2, height/2)
+	position = Vector2(width / 2, height / 2)
 	
 	health = maxHealth
 
@@ -28,6 +28,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if health <= 0:
 		print("You died...")
+		%GameOver.show()
+		get_tree().paused = true
+		
 	player_movement()
 
 func player_movement() -> void:
